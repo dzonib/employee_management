@@ -1,26 +1,32 @@
-﻿@model IEnumerable<EmployeeManagement.Models.Employee>
+﻿@model IEnumerable<Employee>
 
 @{ 
-    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Employee List";
 }
 
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Department</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var employee in Model)
+    <div class="card-deck">
+        @foreach( var employee in Model)
         {
-            <tr>
-                <td>@employee.Id</td>
-                <td>@employee.Name</td>
-                <td>@employee.Department</td>
-            </tr>
+        <div class="card m-3">
+            <div class="card-header">
+                <h3>@employee.Name</h3>
+            </div>
+            <img class="card-img-top" src="~/images/noimage.jpg" asp-append-version="true"/>
+            <div class="card-footer text-center">
+                @*we can do routing like this*@
+                @*<a href="/home/details/@employee.Id" class="btn btn-primary">View</a>*@
+                @*Or using tag helper*@
+                @*@Html.ActionLink("View", "details", "home", new { id = employee.Id })*@
+
+                @*Url.action returns string so we can use it in ancor which we can style*@
+                @*<a href="@Url.Action("details", "home", new { id = employee.Id })" class="btn btn-primary">View</a>*@
+
+                @*ancor tag helpers wich are new in asp.net core*@
+                <a asp-controller="home" asp-action="details" asp-route-Id="@employee.Id"
+                   class="btn btn-primary m-1">View</a>
+                <a href="#" class="btn btn-primary m-1">Edit</a>
+                <a href="#" class="btn btn-danger m-1">Delete</a>
+            </div>
+        </div>
         }
-    </tbody>
-</table>
+    </div>

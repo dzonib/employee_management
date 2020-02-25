@@ -42,7 +42,14 @@ namespace EmployeeManagement
 
             //app.UseFileServer();
 
-            app.UseMvcWithDefaultRoute();
+            //app.UseMvcWithDefaultRoute();
+            //Same stuff as one above
+            app.UseMvc(routes => {
+                routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}" );
+            });
+
+            //Now using attribute routing in controllers
+            //app.UseMvc();
         }
     }
 }
